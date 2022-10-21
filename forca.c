@@ -34,6 +34,7 @@ int jachutou(char letra) {
 }
 void desenhaforca() {
 
+
     printf("Você já deu %d chutes\n", chutesdados);
 
     for(int i = 0; i < strlen(palavrasecreta); i++) {
@@ -48,11 +49,53 @@ void desenhaforca() {
     printf("\n");
 
 }
+
+void adcionarpalavra() {   
+    char resposta;
+
+    printf("Gostaria de adcionar uma nova palavra no Jogo? (S/N)");
+    scanf(" %c", &resposta);
+
+    if(resposta == 'S'){
+
+        char nova[20];
+
+        printf("Digite a nova palavra: ");
+        scanf("%s", nova);
+
+        FILE* f;
+
+        f = fopen("palavras.txt", "r+");
+
+        if(f == 0){
+            printf("Perdão, Banco de dados indisponível\n\n");
+            exit(1);
+        }
+        
+        int qtd;
+        fscanf(f, "%d", &qtd);
+        qtd++;
+
+        fseek(f, 0, SEEK_SET);
+        fprintf(f, "%d", qtd);
+
+        fseek(f, 0, SEEK_END);
+        fprintf(f, "\n%s", nova);
+
+        fclose(f);
+
+    }
+}
 void escolhepalavra() {
     FILE* f;
     
     f = fopen("palavras.txt", "r");
-
+    if (f == 0)
+    {
+        printf("Perdão, Banco de dados indisponível");
+        exit(1);
+    }
+    
     int quantidadespalavra;
     fscanf(f, "%d", &quantidadespalavra);
 
@@ -83,7 +126,12 @@ int enforcou(){
     return erros >= 5;
 }
 int acertou(){
-    for (int i = 0; i < strlen(palavrasecreta); i++) if (!jachutou(palavrasecreta[i])) return 0;   
+    for (int i = 0; i < strlen(palavrasecreta); i++){
+        if (!jachutou(palavrasecreta[i])){
+            return 0; 
+        }
+    } 
+      
     return 1;
 }
 int main() {
@@ -97,5 +145,6 @@ int main() {
         chuta();
         
     } while (!acertou() && !enforcou());
+    adcionarpalavra();
 
 }
