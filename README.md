@@ -6,4 +6,4 @@ Nesse Código foi desenvolvido um jogo com programação com base em funções, 
 
 Assim que o jogo finaliza, será mostrado uma mensagem onde vai ser perguntado se o jogador deseja adcionar uma nova palavra onde será respondido com S/N.
 
-
+Atualmente o projeto está na brancher Adição.
