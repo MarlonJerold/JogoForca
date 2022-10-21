@@ -72,12 +72,12 @@ void adcionarpalavra() {
             exit(1);
         }
         
-        int qtd;
-        fscanf(f, "%d", &qtd);
-        qtd++;
+        int quantidadelinha;
+        fscanf(f, "%d", &quantidadelinha);
+        quantidadelinha++;
 
         fseek(f, 0, SEEK_SET);
-        fprintf(f, "%d", qtd);
+        fprintf(f, "%d", quantidadelinha);
 
         fseek(f, 0, SEEK_END);
         fprintf(f, "\n%s", nova);
@@ -145,6 +145,13 @@ int main() {
         chuta();
         
     } while (!acertou() && !enforcou());
+
+    if(acertou()){
+        printf("Parabens, você acertou a palavra secreta\n");
+    }else{
+        printf("Que pena, você perdeu a palavra secreta era **%s\n\n**", palavrasecreta);
+    }
+
     adcionarpalavra();
 
 }

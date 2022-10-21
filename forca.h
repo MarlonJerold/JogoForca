@@ -1,3 +1,4 @@
+#define TAMANHO_PALAVRA 20
 int enforcou();
 void abertura();
 void chuta();
